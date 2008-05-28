@@ -1,0 +1,569 @@
+Vim: Warning: Output is not to a terminal
+Vim: Warning: Input is not from a terminal
+Sequence: [?1h
+Enter insert mode
+cbMoveCursor: 0 0
+Sequence: =[1;24r
+Change scrolling region to (x,y): 0 0
+Sequence: [m
+Sequence: [m
+Sequence: [0m
+Sequence: [H
+Move cursor (x,y): 0 0
+cbMoveCursor: 0 0
+Sequence: [J
+Sequence: [2;1H
+Move cursor (x,y): 1 0
+cbMoveCursor: 1 0
+Sequence: [1m
+cbPrintCharacter: ~ (126) at 1,0
+Carriage return
+Newline
+cbMoveCursor: 0 1
+cbPrintCharacter: ~ (126) at 0,1
+Carriage return
+Newline
+cbMoveCursor: 0 2
+cbPrintCharacter: ~ (126) at 0,2
+Carriage return
+Newline
+cbMoveCursor: 0 3
+cbPrintCharacter: ~ (126) at 0,3
+Carriage return
+Newline
+cbMoveCursor: 0 4
+cbPrintCharacter: ~ (126) at 0,4
+Carriage return
+Newline
+cbMoveCursor: 0 5
+cbPrintCharacter: ~ (126) at 0,5
+Carriage return
+Newline
+cbMoveCursor: 0 6
+cbPrintCharacter: ~ (126) at 0,6
+Carriage return
+Newline
+cbMoveCursor: 0 7
+cbPrintCharacter: ~ (126) at 0,7
+Carriage return
+Newline
+cbMoveCursor: 0 8
+cbPrintCharacter: ~ (126) at 0,8
+Carriage return
+Newline
+cbMoveCursor: 0 9
+cbPrintCharacter: ~ (126) at 0,9
+Carriage return
+Newline
+cbMoveCursor: 0 10
+cbPrintCharacter: ~ (126) at 0,10
+Carriage return
+Newline
+cbMoveCursor: 0 11
+cbPrintCharacter: ~ (126) at 0,11
+Carriage return
+Newline
+cbMoveCursor: 0 12
+cbPrintCharacter: ~ (126) at 0,12
+Carriage return
+Newline
+cbMoveCursor: 0 13
+cbPrintCharacter: ~ (126) at 0,13
+Carriage return
+Newline
+cbMoveCursor: 0 14
+cbPrintCharacter: ~ (126) at 0,14
+Carriage return
+Newline
+cbMoveCursor: 0 15
+cbPrintCharacter: ~ (126) at 0,15
+Carriage return
+Newline
+cbMoveCursor: 0 16
+cbPrintCharacter: ~ (126) at 0,16
+Carriage return
+Newline
+cbMoveCursor: 0 17
+cbPrintCharacter: ~ (126) at 0,17
+Carriage return
+Newline
+cbMoveCursor: 0 18
+cbPrintCharacter: ~ (126) at 0,18
+Carriage return
+Newline
+cbMoveCursor: 0 19
+cbPrintCharacter: ~ (126) at 0,19
+Carriage return
+Newline
+cbMoveCursor: 0 20
+cbPrintCharacter: ~ (126) at 0,20
+Carriage return
+Newline
+cbMoveCursor: 0 21
+cbPrintCharacter: ~ (126) at 0,21
+Sequence: [0m
+Sequence: [5;32H
+Move cursor (x,y): 4 31
+cbMoveCursor: 4 31
+cbPrintCharacter: V (86) at 4,31
+cbPrintCharacter: I (73) at 5,31
+cbPrintCharacter: M (77) at 6,31
+cbPrintCharacter:   (32) at 7,31
+cbPrintCharacter: - (45) at 8,31
+cbPrintCharacter:   (32) at 9,31
+cbPrintCharacter: V (86) at 10,31
+cbPrintCharacter: i (105) at 11,31
+cbPrintCharacter:   (32) at 12,31
+cbPrintCharacter: I (73) at 13,31
+cbPrintCharacter: M (77) at 14,31
+cbPrintCharacter: p (112) at 15,31
+cbPrintCharacter: r (114) at 16,31
+cbPrintCharacter: o (111) at 17,31
+cbPrintCharacter: v (118) at 18,31
+cbPrintCharacter: e (101) at 19,31
+cbPrintCharacter: d (100) at 20,31
+Sequence: [7;34H
+Move cursor (x,y): 6 33
+cbMoveCursor: 6 33
+cbPrintCharacter: v (118) at 6,33
+cbPrintCharacter: e (101) at 7,33
+cbPrintCharacter: r (114) at 8,33
+cbPrintCharacter: s (115) at 9,33
+cbPrintCharacter: i (105) at 10,33
+cbPrintCharacter: o (111) at 11,33
+cbPrintCharacter: n (110) at 12,33
+cbPrintCharacter:   (32) at 13,33
+cbPrintCharacter: 7 (55) at 14,33
+cbPrintCharacter: . (46) at 15,33
+cbPrintCharacter: 0 (48) at 16,33
+cbPrintCharacter: . (46) at 17,33
+cbPrintCharacter: 4 (52) at 18,33
+cbPrintCharacter: 2 (50) at 19,33
+Sequence: [8;29H
+Move cursor (x,y): 7 28
+cbMoveCursor: 7 28
+cbPrintCharacter: b (98) at 7,28
+cbPrintCharacter: y (121) at 8,28
+cbPrintCharacter:   (32) at 9,28
+cbPrintCharacter: B (66) at 10,28
+cbPrintCharacter: r (114) at 11,28
+cbPrintCharacter: a (97) at 12,28
+cbPrintCharacter: m (109) at 13,28
+cbPrintCharacter:   (32) at 14,28
+cbPrintCharacter: M (77) at 15,28
+cbPrintCharacter: o (111) at 16,28
+cbPrintCharacter: o (111) at 17,28
+cbPrintCharacter: l (108) at 18,28
+cbPrintCharacter: e (101) at 19,28
+cbPrintCharacter: n (110) at 20,28
+cbPrintCharacter: a (97) at 21,28
+cbPrintCharacter: a (97) at 22,28
+cbPrintCharacter: r (114) at 23,28
+cbPrintCharacter:   (32) at 24,28
+cbPrintCharacter: e (101) at 25,28
+cbPrintCharacter: t (116) at 26,28
+cbPrintCharacter:   (32) at 27,28
+cbPrintCharacter: a (97) at 28,28
+cbPrintCharacter: l (108) at 29,28
+cbPrintCharacter: . (46) at 30,28
+Sequence: [9;19H
+Move cursor (x,y): 8 18
+cbMoveCursor: 8 18
+cbPrintCharacter: V (86) at 8,18
+cbPrintCharacter: i (105) at 9,18
+cbPrintCharacter: m (109) at 10,18
+cbPrintCharacter:   (32) at 11,18
+cbPrintCharacter: i (105) at 12,18
+cbPrintCharacter: s (115) at 13,18
+cbPrintCharacter:   (32) at 14,18
+cbPrintCharacter: o (111) at 15,18
+cbPrintCharacter: p (112) at 16,18
+cbPrintCharacter: e (101) at 17,18
+cbPrintCharacter: n (110) at 18,18
+cbPrintCharacter:   (32) at 19,18
+cbPrintCharacter: s (115) at 20,18
+cbPrintCharacter: o (111) at 21,18
+cbPrintCharacter: u (117) at 22,18
+cbPrintCharacter: r (114) at 23,18
+cbPrintCharacter: c (99) at 24,18
+cbPrintCharacter: e (101) at 25,18
+cbPrintCharacter:   (32) at 26,18
+cbPrintCharacter: a (97) at 27,18
+cbPrintCharacter: n (110) at 28,18
+cbPrintCharacter: d (100) at 29,18
+cbPrintCharacter:   (32) at 30,18
+cbPrintCharacter: f (102) at 31,18
+cbPrintCharacter: r (114) at 32,18
+cbPrintCharacter: e (101) at 33,18
+cbPrintCharacter: e (101) at 34,18
+cbPrintCharacter: l (108) at 35,18
+cbPrintCharacter: y (121) at 36,18
+cbPrintCharacter:   (32) at 37,18
+cbPrintCharacter: d (100) at 38,18
+cbPrintCharacter: i (105) at 39,18
+cbPrintCharacter: s (115) at 40,18
+cbPrintCharacter: t (116) at 41,18
+cbPrintCharacter: r (114) at 42,18
+cbPrintCharacter: i (105) at 43,18
+cbPrintCharacter: b (98) at 44,18
+cbPrintCharacter: u (117) at 45,18
+cbPrintCharacter: t (116) at 46,18
+cbPrintCharacter: a (97) at 47,18
+cbPrintCharacter: b (98) at 48,18
+cbPrintCharacter: l (108) at 49,18
+cbPrintCharacter: e (101) at 50,18
+Sequence: [11;26H
+Move cursor (x,y): 10 25
+cbMoveCursor: 10 25
+cbPrintCharacter: H (72) at 10,25
+cbPrintCharacter: e (101) at 11,25
+cbPrintCharacter: l (108) at 12,25
+cbPrintCharacter: p (112) at 13,25
+cbPrintCharacter:   (32) at 14,25
+cbPrintCharacter: p (112) at 15,25
+cbPrintCharacter: o (111) at 16,25
+cbPrintCharacter: o (111) at 17,25
+cbPrintCharacter: r (114) at 18,25
+cbPrintCharacter:   (32) at 19,25
+cbPrintCharacter: c (99) at 20,25
+cbPrintCharacter: h (104) at 21,25
+cbPrintCharacter: i (105) at 22,25
+cbPrintCharacter: l (108) at 23,25
+cbPrintCharacter: d (100) at 24,25
+cbPrintCharacter: r (114) at 25,25
+cbPrintCharacter: e (101) at 26,25
+cbPrintCharacter: n (110) at 27,25
+cbPrintCharacter:   (32) at 28,25
+cbPrintCharacter: i (105) at 29,25
+cbPrintCharacter: n (110) at 30,25
+cbPrintCharacter:   (32) at 31,25
+cbPrintCharacter: U (85) at 32,25
+cbPrintCharacter: g (103) at 33,25
+cbPrintCharacter: a (97) at 34,25
+cbPrintCharacter: n (110) at 35,25
+cbPrintCharacter: d (100) at 36,25
+cbPrintCharacter: a (97) at 37,25
+cbPrintCharacter: ! (33) at 38,25
+Sequence: [12;18H
+Move cursor (x,y): 11 17
+cbMoveCursor: 11 17
+cbPrintCharacter: t (116) at 11,17
+cbPrintCharacter: y (121) at 12,17
+cbPrintCharacter: p (112) at 13,17
+cbPrintCharacter: e (101) at 14,17
+cbPrintCharacter:   (32) at 15,17
+cbPrintCharacter:   (32) at 16,17
+cbPrintCharacter: : (58) at 17,17
+cbPrintCharacter: h (104) at 18,17
+cbPrintCharacter: e (101) at 19,17
+cbPrintCharacter: l (108) at 20,17
+cbPrintCharacter: p (112) at 21,17
+cbPrintCharacter:   (32) at 22,17
+cbPrintCharacter: i (105) at 23,17
+cbPrintCharacter: c (99) at 24,17
+cbPrintCharacter: c (99) at 25,17
+cbPrintCharacter: f (102) at 26,17
+Sequence: [1m
+cbPrintCharacter: < (60) at 27,17
+cbPrintCharacter: E (69) at 28,17
+cbPrintCharacter: n (110) at 29,17
+cbPrintCharacter: t (116) at 30,17
+cbPrintCharacter: e (101) at 31,17
+cbPrintCharacter: r (114) at 32,17
+cbPrintCharacter: > (62) at 33,17
+Sequence: [0m
+Sequence: [7C
+cbMoveCursor: 41 17
+cbPrintCharacter: f (102) at 41,17
+cbPrintCharacter: o (111) at 42,17
+cbPrintCharacter: r (114) at 43,17
+cbPrintCharacter:   (32) at 44,17
+cbPrintCharacter: i (105) at 45,17
+cbPrintCharacter: n (110) at 46,17
+cbPrintCharacter: f (102) at 47,17
+cbPrintCharacter: o (111) at 48,17
+cbPrintCharacter: r (114) at 49,17
+cbPrintCharacter: m (109) at 50,17
+cbPrintCharacter: a (97) at 51,17
+cbPrintCharacter: t (116) at 52,17
+cbPrintCharacter: i (105) at 53,17
+cbPrintCharacter: o (111) at 54,17
+cbPrintCharacter: n (110) at 55,17
+Sequence: [14;18H
+Move cursor (x,y): 13 17
+cbMoveCursor: 13 17
+cbPrintCharacter: t (116) at 13,17
+cbPrintCharacter: y (121) at 14,17
+cbPrintCharacter: p (112) at 15,17
+cbPrintCharacter: e (101) at 16,17
+cbPrintCharacter:   (32) at 17,17
+cbPrintCharacter:   (32) at 18,17
+cbPrintCharacter: : (58) at 19,17
+cbPrintCharacter: q (113) at 20,17
+Sequence: [1m
+cbPrintCharacter: < (60) at 21,17
+cbPrintCharacter: E (69) at 22,17
+cbPrintCharacter: n (110) at 23,17
+cbPrintCharacter: t (116) at 24,17
+cbPrintCharacter: e (101) at 25,17
+cbPrintCharacter: r (114) at 26,17
+cbPrintCharacter: > (62) at 27,17
+Sequence: [0m
+Sequence: [15C
+cbMoveCursor: 43 17
+cbPrintCharacter: t (116) at 43,17
+cbPrintCharacter: o (111) at 44,17
+cbPrintCharacter:   (32) at 45,17
+cbPrintCharacter: e (101) at 46,17
+cbPrintCharacter: x (120) at 47,17
+cbPrintCharacter: i (105) at 48,17
+cbPrintCharacter: t (116) at 49,17
+Sequence: [15;18H
+Move cursor (x,y): 14 17
+cbMoveCursor: 14 17
+cbPrintCharacter: t (116) at 14,17
+cbPrintCharacter: y (121) at 15,17
+cbPrintCharacter: p (112) at 16,17
+cbPrintCharacter: e (101) at 17,17
+cbPrintCharacter:   (32) at 18,17
+cbPrintCharacter:   (32) at 19,17
+cbPrintCharacter: : (58) at 20,17
+cbPrintCharacter: h (104) at 21,17
+cbPrintCharacter: e (101) at 22,17
+cbPrintCharacter: l (108) at 23,17
+cbPrintCharacter: p (112) at 24,17
+Sequence: [1m
+cbPrintCharacter: < (60) at 25,17
+cbPrintCharacter: E (69) at 26,17
+cbPrintCharacter: n (110) at 27,17
+cbPrintCharacter: t (116) at 28,17
+cbPrintCharacter: e (101) at 29,17
+cbPrintCharacter: r (114) at 30,17
+cbPrintCharacter: > (62) at 31,17
+Sequence: [0m
+cbPrintCharacter:   (32) at 32,17
+cbPrintCharacter:   (32) at 33,17
+cbPrintCharacter: o (111) at 34,17
+cbPrintCharacter: r (114) at 35,17
+cbPrintCharacter:   (32) at 36,17
+cbPrintCharacter:   (32) at 37,17
+Sequence: [1m
+cbPrintCharacter: < (60) at 38,17
+cbPrintCharacter: F (70) at 39,17
+cbPrintCharacter: 1 (49) at 40,17
+cbPrintCharacter: > (62) at 41,17
+Sequence: [0m
+cbPrintCharacter:   (32) at 42,17
+cbPrintCharacter:   (32) at 43,17
+cbPrintCharacter: f (102) at 44,17
+cbPrintCharacter: o (111) at 45,17
+cbPrintCharacter: r (114) at 46,17
+cbPrintCharacter:   (32) at 47,17
+cbPrintCharacter: o (111) at 48,17
+cbPrintCharacter: n (110) at 49,17
+cbPrintCharacter: - (45) at 50,17
+cbPrintCharacter: l (108) at 51,17
+cbPrintCharacter: i (105) at 52,17
+cbPrintCharacter: n (110) at 53,17
+cbPrintCharacter: e (101) at 54,17
+cbPrintCharacter:   (32) at 55,17
+cbPrintCharacter: h (104) at 56,17
+cbPrintCharacter: e (101) at 57,17
+cbPrintCharacter: l (108) at 58,17
+cbPrintCharacter: p (112) at 59,17
+Sequence: [16;18H
+Move cursor (x,y): 15 17
+cbMoveCursor: 15 17
+cbPrintCharacter: t (116) at 15,17
+cbPrintCharacter: y (121) at 16,17
+cbPrintCharacter: p (112) at 17,17
+cbPrintCharacter: e (101) at 18,17
+cbPrintCharacter:   (32) at 19,17
+cbPrintCharacter:   (32) at 20,17
+cbPrintCharacter: : (58) at 21,17
+cbPrintCharacter: h (104) at 22,17
+cbPrintCharacter: e (101) at 23,17
+cbPrintCharacter: l (108) at 24,17
+cbPrintCharacter: p (112) at 25,17
+cbPrintCharacter:   (32) at 26,17
+cbPrintCharacter: v (118) at 27,17
+cbPrintCharacter: e (101) at 28,17
+cbPrintCharacter: r (114) at 29,17
+cbPrintCharacter: s (115) at 30,17
+cbPrintCharacter: i (105) at 31,17
+cbPrintCharacter: o (111) at 32,17
+cbPrintCharacter: n (110) at 33,17
+cbPrintCharacter: 7 (55) at 34,17
+Sequence: [1m
+cbPrintCharacter: < (60) at 35,17
+cbPrintCharacter: E (69) at 36,17
+cbPrintCharacter: n (110) at 37,17
+cbPrintCharacter: t (116) at 38,17
+cbPrintCharacter: e (101) at 39,17
+cbPrintCharacter: r (114) at 40,17
+cbPrintCharacter: > (62) at 41,17
+Sequence: [0m
+cbPrintCharacter:   (32) at 42,17
+cbPrintCharacter:   (32) at 43,17
+cbPrintCharacter:   (32) at 44,17
+cbPrintCharacter: f (102) at 45,17
+cbPrintCharacter: o (111) at 46,17
+cbPrintCharacter: r (114) at 47,17
+cbPrintCharacter:   (32) at 48,17
+cbPrintCharacter: v (118) at 49,17
+cbPrintCharacter: e (101) at 50,17
+cbPrintCharacter: r (114) at 51,17
+cbPrintCharacter: s (115) at 52,17
+cbPrintCharacter: i (105) at 53,17
+cbPrintCharacter: o (111) at 54,17
+cbPrintCharacter: n (110) at 55,17
+cbPrintCharacter:   (32) at 56,17
+cbPrintCharacter: i (105) at 57,17
+cbPrintCharacter: n (110) at 58,17
+cbPrintCharacter: f (102) at 59,17
+cbPrintCharacter: o (111) at 60,17
+Sequence: [18;26H
+Move cursor (x,y): 17 25
+cbMoveCursor: 17 25
+cbPrintCharacter: R (82) at 17,25
+cbPrintCharacter: u (117) at 18,25
+cbPrintCharacter: n (110) at 19,25
+cbPrintCharacter: n (110) at 20,25
+cbPrintCharacter: i (105) at 21,25
+cbPrintCharacter: n (110) at 22,25
+cbPrintCharacter: g (103) at 23,25
+cbPrintCharacter:   (32) at 24,25
+cbPrintCharacter: i (105) at 25,25
+cbPrintCharacter: n (110) at 26,25
+cbPrintCharacter:   (32) at 27,25
+cbPrintCharacter: V (86) at 28,25
+cbPrintCharacter: i (105) at 29,25
+cbPrintCharacter:   (32) at 30,25
+cbPrintCharacter: c (99) at 31,25
+cbPrintCharacter: o (111) at 32,25
+cbPrintCharacter: m (109) at 33,25
+cbPrintCharacter: p (112) at 34,25
+cbPrintCharacter: a (97) at 35,25
+cbPrintCharacter: t (116) at 36,25
+cbPrintCharacter: i (105) at 37,25
+cbPrintCharacter: b (98) at 38,25
+cbPrintCharacter: l (108) at 39,25
+cbPrintCharacter: e (101) at 40,25
+cbPrintCharacter:   (32) at 41,25
+cbPrintCharacter: m (109) at 42,25
+cbPrintCharacter: o (111) at 43,25
+cbPrintCharacter: d (100) at 44,25
+cbPrintCharacter: e (101) at 45,25
+Sequence: [19;18H
+Move cursor (x,y): 18 17
+cbMoveCursor: 18 17
+cbPrintCharacter: t (116) at 18,17
+cbPrintCharacter: y (121) at 19,17
+cbPrintCharacter: p (112) at 20,17
+cbPrintCharacter: e (101) at 21,17
+cbPrintCharacter:   (32) at 22,17
+cbPrintCharacter:   (32) at 23,17
+cbPrintCharacter: : (58) at 24,17
+cbPrintCharacter: s (115) at 25,17
+cbPrintCharacter: e (101) at 26,17
+cbPrintCharacter: t (116) at 27,17
+cbPrintCharacter:   (32) at 28,17
+cbPrintCharacter: n (110) at 29,17
+cbPrintCharacter: o (111) at 30,17
+cbPrintCharacter: c (99) at 31,17
+cbPrintCharacter: p (112) at 32,17
+Sequence: [1m
+cbPrintCharacter: < (60) at 33,17
+cbPrintCharacter: E (69) at 34,17
+cbPrintCharacter: n (110) at 35,17
+cbPrintCharacter: t (116) at 36,17
+cbPrintCharacter: e (101) at 37,17
+cbPrintCharacter: r (114) at 38,17
+cbPrintCharacter: > (62) at 39,17
+Sequence: [0m
+Sequence: [8C
+cbMoveCursor: 48 17
+cbPrintCharacter: f (102) at 48,17
+cbPrintCharacter: o (111) at 49,17
+cbPrintCharacter: r (114) at 50,17
+cbPrintCharacter:   (32) at 51,17
+cbPrintCharacter: V (86) at 52,17
+cbPrintCharacter: i (105) at 53,17
+cbPrintCharacter: m (109) at 54,17
+cbPrintCharacter:   (32) at 55,17
+cbPrintCharacter: d (100) at 56,17
+cbPrintCharacter: e (101) at 57,17
+cbPrintCharacter: f (102) at 58,17
+cbPrintCharacter: a (97) at 59,17
+cbPrintCharacter: u (117) at 60,17
+cbPrintCharacter: l (108) at 61,17
+cbPrintCharacter: t (116) at 62,17
+cbPrintCharacter: s (115) at 63,17
+Sequence: [20;18H
+Move cursor (x,y): 19 17
+cbMoveCursor: 19 17
+cbPrintCharacter: t (116) at 19,17
+cbPrintCharacter: y (121) at 20,17
+cbPrintCharacter: p (112) at 21,17
+cbPrintCharacter: e (101) at 22,17
+cbPrintCharacter:   (32) at 23,17
+cbPrintCharacter:   (32) at 24,17
+cbPrintCharacter: : (58) at 25,17
+cbPrintCharacter: h (104) at 26,17
+cbPrintCharacter: e (101) at 27,17
+cbPrintCharacter: l (108) at 28,17
+cbPrintCharacter: p (112) at 29,17
+cbPrintCharacter:   (32) at 30,17
+cbPrintCharacter: c (99) at 31,17
+cbPrintCharacter: p (112) at 32,17
+cbPrintCharacter: - (45) at 33,17
+cbPrintCharacter: d (100) at 34,17
+cbPrintCharacter: e (101) at 35,17
+cbPrintCharacter: f (102) at 36,17
+cbPrintCharacter: a (97) at 37,17
+cbPrintCharacter: u (117) at 38,17
+cbPrintCharacter: l (108) at 39,17
+cbPrintCharacter: t (116) at 40,17
+Sequence: [1m
+cbPrintCharacter: < (60) at 41,17
+cbPrintCharacter: E (69) at 42,17
+cbPrintCharacter: n (110) at 43,17
+cbPrintCharacter: t (116) at 44,17
+cbPrintCharacter: e (101) at 45,17
+cbPrintCharacter: r (114) at 46,17
+cbPrintCharacter: > (62) at 47,17
+Sequence: [0m
+cbPrintCharacter:   (32) at 48,17
+cbPrintCharacter: f (102) at 49,17
+cbPrintCharacter: o (111) at 50,17
+cbPrintCharacter: r (114) at 51,17
+cbPrintCharacter:   (32) at 52,17
+cbPrintCharacter: i (105) at 53,17
+cbPrintCharacter: n (110) at 54,17
+cbPrintCharacter: f (102) at 55,17
+cbPrintCharacter: o (111) at 56,17
+cbPrintCharacter:   (32) at 57,17
+cbPrintCharacter: o (111) at 58,17
+cbPrintCharacter: n (110) at 59,17
+cbPrintCharacter:   (32) at 60,17
+cbPrintCharacter: t (116) at 61,17
+cbPrintCharacter: h (104) at 62,17
+cbPrintCharacter: i (105) at 63,17
+cbPrintCharacter: s (115) at 64,17
+Sequence: [1;1H
+Move cursor (x,y): 0 0
+cbMoveCursor: 0 0
+Sequence: [24;1H
+Move cursor (x,y): 23 0
+cbMoveCursor: 23 0
+cbPrintCharacter: : (58) at 23,0
+cbPrintCharacter: q (113) at 24,0
+Carriage return
+Sequence: [?1l
+Sequence: >[24;1H
+Move cursor (x,y): 0 0
+cbMoveCursor: 0 0
+Sequence: [K
+Sequence: [24;1H
+Move cursor (x,y): 23 0
+cbMoveCursor: 23 0

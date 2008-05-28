@@ -1,0 +1,41 @@
+Terminal Escape Sequence Interpreter
+
+interprets escape codes coming from file descriptor or pipe and invokes callbacks after parsing a full escape sequence
+
+
+
+TERMINFO NOTES
+
+- setf is terminfo capname for set foreground color
+- terminal has numeric capability called colors that specifies #
+	colors#8
+- the am capability (automargin) tells applications that the terminal will wrap text to the next line
+
+Have to Interpret
+	- newlines: wrap next, scroll up?
+	- backspaces: wrap back up? YES, if capability
+	- tabs? over to x%8 or something
+	- scrolling regions
+
+LINUX-RELATED
+
+- the linux console is not exactly a vt102.
+- type "man console_codes" to get a description of the sequences expected by the linux console
+
+vttest (http://www.ibiblio.org/pub/Linux/utils/console/)
+http://www.tldp.org/HOWTO/Text-Terminal-HOWTO.html
+
+
+NCURSES
+
+- use bkgd(or'd attributes and character) to set background character with colors
+
+
+QUESTIONS
+
+- does a terminfo definition really need to specify the string sent to the terminal for newline, carriage return, backspace, enter, etc?
+	- shouldn't this be chosen according to the character set and locale?
+- can/should termios be used on pty FDs from posix_openpt()?
+- how deal with unicode characters?
+- time taken for initscr(), Tesi vs. Xterm
+- does iterm buffer input up to EOL, end of input or next sequence?

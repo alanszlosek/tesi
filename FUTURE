@@ -1,0 +1,26 @@
+- proper handling of tabs
+- implement knox using iterm
+	- get ui nice, etc
+	- then switch back to TESI when TESI is mature
+- why less not process keypresses but vim does?
+- fix color usage from child apps
+- issue with margin at bottom right
+
+- what should echo the keys types at the command line?
+- terminals of larger size
+	- env variables?
+- character set mapping
+
+
+DONE
+
+- callback_invertColors() function for flipping colors on whole terminal
+- look at libROTE for pty and shell invocation
+	- posix_openpt is bi-directional, so it should work for my needs with one use and then grantpt(), etc.
+	- try it again in fork_pty.c
+- if find term in terminfo with more "pure and simple" software implementation, i'll switch to it
+	- didn't exist ... so i wrote my own
+- colors
+- Ask vt100 if keeping state is necessary for emulators
+	- VT102 because of a smaller, easier to parse sequence set
+	- Need to do character code mappings for drawing character sets to linux (and other) terminals

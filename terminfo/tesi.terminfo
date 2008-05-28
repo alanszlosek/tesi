@@ -1,0 +1,38 @@
+# TESI. A fully-functional terminal with only the necessary escape sequences.
+# http://www.greaterscope.net/project/Tesi
+tesi|tesi teminal,
+	am, colors#8, pairs#64, it#8,
+	is2=\ER\EC\E0;0M,
+	initc=,
+	clear=\EC,
+	el=\Ec,
+
+	csr=\E%p1%d;%p2%dr,
+	ind=\EU,
+	ri=\ED,
+
+	home=\E0;0M,
+	cup=\E%p1%d;%p2%dM,
+
+	il=\E%p1%dL,
+
+	smir=\E1I,
+	rmir=\E0I,
+
+	bel=^G,
+
+	sgr0=\E0a,
+	smso=\E1;1a,
+	rmso=\E1;0a,
+	smul=\E2;1a,
+	rmul=\E2;0a,
+	rev=\E3;1a,
+	blink=\E4;1a,
+	bold=\E5;1a,
+	setf=\E6;%p1%da,
+	setb=\E7;%p1%da,
+
+	kcuu1=\Ek,
+	kcud1=\Ej,
+	kcub1=\Eh,
+	kcuf1=\El

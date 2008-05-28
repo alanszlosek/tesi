@@ -1,0 +1,63 @@
+Since May I've been making progress on a library I affectionately call TESI. It is a combination of a "Terminal Escape Sequence Interpreter" and the Terminfo definition for the terminal it interprets. It aims to be a more well-rounded  alternative to http://www.openi18n.org/subgroups/utildev/iterm/(iterm) and http://rote.sourceforge.net/(ROTE).
+
+
+
+
+++ The Point
+
+There are many areas of computing that need improvement, and I see terminals being one of them. Software terminals still closely emulate the hardware terminals of 20+ years ago. This means terminals aren't as efficient or simple as they should be.
+
+Also, /project/Knox(Knox) needs something simpler than iterm and more usable than ROTE. If a programmer wants to create their own terminal (like xterm, Konsole, etc) he shouldn't have to worry about all the details of emulating a terminal. He should only have to worry about drawing to the screen and adding snazzy UI-related features.
+
+++ TESI is Unique
+
+iterm is a "framework for making an Internationalized Virtual Terminal Emulator" and it is also a type of terminal, which libiterm emulates. TESI is similar, except that a TESI terminal is not reminiscent of VT100, VT102, VT202 or Xterm terminals. TESI doesn't yet have internationalization capabilities but it is a high priority.
+
+ROTE assumes you'll be using nCurses to display your output. TESI doesn't assume this and tries to make it easy to use something like GTK.
+
+++ Achieved Milestones
+
+* Minimized escape sequence set means interpretation code is simpler and the sequences are easier for humans to debug 
+* Can be used to run VIM!
+* Terminals have their own controlling PTY
+* Attributes (bold, inverse)
+* Insert line, delete line
+* Insert char
+* Normal character printing
+
+++ Remaining Milestones
+
+* Support for advanced applications that make use of alternate drawing character sets (apps that utilize solid-line borders)
+* Unicode support
+* Finalize colors
+* Ensure correct handling of large terminals
+
+
+
+
+++ Somewhat Technical Details
+
+TESI merely processes escape sequences received from the child process (such as a shell) and invokes the appropriate callback functions (which are implemented by the programmer). This means the method for drawing characters to the screen is up to you. Output can be performed using any library or GUI API that you want, or none at all.
+
+++ API
+
+: newTESIObject() : Returns a pointer to a new TESI object.
+: tesi_handleInput(tesiObject*) : Handles the escape sequences awaiting a TESI object.
+: deleteTESIObject(tesiObject*) : Delete a TESI object.
+
+The following are callbacks that should be set by the coder wishing to utilize TESI. This leaves it up to the coder to perform the actual drawing on the screen with a library such as GTK or DirectFB.
+
+: callback_clear(void*) : Clear canvas
+: callback_printCharacter(void*, char) : Print character at current cursor position
+: callback_printString(void*, char*, int) : Print string of length at current cursor position
+: callback_insertCharacter(void*, char) : Insert character at current cursor position
+: callback_insertLine(void*) : Insert line at current line
+: callback_eraseLine(void*) : Erase line at specified line
+: callback_eraseCharacter(void*) : Erase character at specified cursor position
+: callback_printString(void*, char) : Print string at current cursor position
+: callback_moveCursor(void*, int, int) : Move cursor to X, Y.
+: callback_attributes(void*, short, short, short, short, short, short, short) : Set attributes (bold, blink, inverse, underline, foreground, background, charset)
+: callback_scrollRegion(void*,int,int) : Set scroll region from line A to line B.
+: callback_scrollUp(void*) : Scroll contents up 1 line.
+: callback_scrollDown(void*) : Scroll contents down 1 line.
+: callback_bell(void*) : Perform a bell command

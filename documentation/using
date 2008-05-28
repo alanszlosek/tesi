@@ -1,0 +1,3 @@
+Some things to note when using TESI:
+
+# Your output canvas needs to be able to scroll the whole screen (or 1+ lines) up and down. In my example TESI application, the canvas is an nCurses window, which supports scrolling up and down.

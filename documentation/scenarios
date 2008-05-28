@@ -1,0 +1,12 @@
+Cursor is NOT on the last line of the screen. User presses Enter.
+- Cursor moves to left-most position on the next line.
+
+Cursos is located on the last line of the screen. User presses Enter.
+- Cursor should be moved to left-most position and screen should scroll up
+
+User is typing a long command at a prompt that is not at the end of the screen
+- After right-most position on the screen is filled the next character will be printed left-most on next line
+
+User is typing a long command at a prompt at the last line of the screen
+- After the right-most position is filled, the next character will be displayed as the left-most position on the same line AFTER the screen is made to scroll up
+

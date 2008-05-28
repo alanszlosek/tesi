@@ -1,0 +1,108 @@
+2007-05-19
+
+Scrolling. Needs a bit more thought. Probably should detect the need for scrolling differently than in limitCursor.
+	- Pressing enter on last line of terminal should move cursor to 0, then invoke a scroll.
+
+2006-10-03
+
+Need sequence for setting terminal title (like xterm).
+
+2006-10-01
+
+- ccc capability? - can redefine existing colors
+- km - has meta key?
+- pairs#64
+- cr - carriage return
+- el means clear to eol, not erase line
+- kent - key enter
+- when enter characters to end of line, moves line to left and starts cursor half way... what's doing this?
+- kbs - backspace?
+
+could less be mis-behaving because of termios buffering?
+
+Less prints to the screen starting at the last line of the terminal. And for some reason it's not processing my keypresses. Have to hit q twice to get it to quit.
+
+2006-09-30
+
+- TESI reset sequence should set defaults
+	- scroll region
+	- output attributes
+	- cursor position
+
+2006-09-24
+
+man console_codes
+man charsets
+stty -a for cols/rows
+
+Input
+
+1. User presses key
+2. Keyboard generates one or more scancodes which are received by the kernel
+3. What is passed to the the terminal driver?
+	a. If keyboard driver is in scan mode, they are passed to the application
+	b. In keycode mode, key presses correspond to key press or release events
+	c. Otherwise keycodes are looked up in the keymap, translated and passed along
+
+Easiest thing would be to be able to use the keymap values to check for the pressed key and then to turn this back into what the application expects, depending on the tty io settings (scanmode, keymaps, keycodes, etc). However, ncurses and slang (i think) can only map one way.
+
+2006-09-21
+
+# Support every key on an English (US/UK/etc) PC keyboard
+# Keystrokes perform the function expected by a Windows user
+# 80x25 display
+# Character set = codepage 437
+# 8 foreground and 8 background colours
+# Minimal functions:
+
+    * Move cursor to specified line and column
+    * Clear screen
+    * Insert new line below cursor (scroll remainder down)
+    * Delete line containing cursor (and scroll remainder up)
+    * Delect character at cursor (remaining chars shifted left)
+    * Insert space at cursor (remaining chars shifted right)
+
+http://mail.nl.linux.org/linux-utf8/2001-01/msg00173.html
+
+
+
+terminfo
+
+colors#8
+lines#80
+cols#25
+it#8 - spaces per tab
+bel - bell
+
+blink
+bold
+standout
+underline
+reverse video
+
+clear - clear screen and home cursor
+cup - move cursor
+il1 - insert line
+dl1 - delete line
+dch1 - delete character
+ich1 - insert character
+replace character
+
+special characters
+
+
+
+
+2006-09-03
+
+Biggest Blunder Yet
+
+Somehow I thought the first parameter of the move cursor sequence was the column number. It's not. It's the line number. Amazing the difference it makes.
+
+There are too many operations available for old terminals. Since we're only dealing with software now, most are not necessary anymore.
+
+2006-09-02
+
+Pointer Blunders
+
+The transition from the "old way" of doing a certain piece of logic to the "new way" seems to always leave lingering bugs. In a few places I was still passing pointer to my tesi object, when I should have been passing the tesi object's pointer member.
