@@ -53,12 +53,14 @@ int tesi_handleInput(struct tesiObject *to) {
 		}
 
 		if((c >= 1 && c <= 31) || c == 127) {
+			// this should trigger partialSequence = 1
 			tesi_handleControlCharacter(to, c);
 			continue;
 		}
 
-		if(to->partialSequence) {
-			// keep track of the sequence type. some
+		if(to->partialSequence > 0) {
+			// where do we set partialSequence to 1? in handleControlCharacter
+			// keep track of the sequence type
 			to->sequence[ to->sequenceLength++ ] = c;
 			to->sequence[ to->sequenceLength ] = 0;
 			if(
@@ -66,6 +68,12 @@ int tesi_handleInput(struct tesiObject *to) {
 				(c >= 'A' && c <= 'Z')
 			) // done with sequence
 				to->partialSequence = 0;
+
+#ifdef DEBUG
+			// check to->sequenceLength ... it can't be more than 39
+			if(to->sequenceLength > 39)
+				fprintf(stderr, "Sequence length exceeded: %s\n", to->sequenceLength);
+#endif
 
 			if(to->partialSequence == 0) {
 #ifdef DEBUG
@@ -76,17 +84,18 @@ int tesi_handleInput(struct tesiObject *to) {
 				to->parametersLength = 0;
 			}
 		} else { // standard text, not part of any escape sequence
-			if(to->partialSequence == 0) {
+			//if(to->partialSequence == 0) {
 				// newlines aren't in visible range, so they shouldn't be a problem
 				if(to->insertMode == 0 && to->callback_printCharacter) {
 					to->callback_printCharacter(to->pointer, c, to->x, to->y);
 					to->x++;
-					tesi_limitCursor(to, 1);
+					tesi_limitCursor(to);
 				}
+				// there is currently no way to enter insert mode
 				if(to->insertMode == 1 && to->callback_insertCharacter) {
 					to->callback_insertCharacter(to->pointer, c, to->x, to->y);
 				}
-			}
+			//}
 		}
 	}
 	return 1;
@@ -108,7 +117,7 @@ int tesi_handleControlCharacter(struct tesiObject *to, char c) {
 
 		case '\r': // carriage return ('M' - '@'). Move cursor to first column.
 #ifdef DEBUG
-			fprintf(stderr, "Carriage return\n");
+			fprintf(stderr, "Carriage return. Move to x=0\n");
 #endif
 			to->x = 0;
 			if(to->callback_moveCursor)
@@ -117,35 +126,33 @@ int tesi_handleControlCharacter(struct tesiObject *to, char c) {
 
 		case '\n':  // line feed ('J' - '@'). Move cursor down line and to first column.
 #ifdef DEBUG
-			fprintf(stderr, "Newline\n");
+			fprintf(stderr, "Newline. x=0 y++\n");
 #endif
 			to->y++;
 			//if(to->insertMode == 0 && to->linefeedMode == 1)
 				to->x = 0;
-			/*
-			if(i == 1 && to->callback_scrollUp)
-				to->callback_scrollUp(to->pointer);
-			*/
-			tesi_limitCursor(to, 1);
+			tesi_limitCursor(to);
+			if(to->callback_moveCursor)
+				to->callback_moveCursor(to->pointer, to->x, to->y);
 			break;
 
 		case '\t': // ht - horizontal tab, ('I' - '@')
 #ifdef DEBUG
-			fprintf(stderr, "Tab. %d,%d (x,y)\n", to->x, to->y);
+			fprintf(stderr, "Tab. Currently at %d,%d (x,y)\n", to->x, to->y);
 #endif
 			j = 8 - (to->x % 8);		
 			if(j == 0)
 				j = 8;
+			// loop is necessary so add spaces along the way
 			for(i = 0; i < j; i++, to->x++) {
-				if(tesi_limitCursor(to, 1))
-					break;
+				tesi_limitCursor(to);
 				if(to->callback_moveCursor)
 					to->callback_moveCursor(to->pointer, to->x, to->y);
 				if(to->callback_printCharacter)
 					to->callback_printCharacter(to->pointer, ' ', to->x, to->y);
 			}
 #ifdef DEBUG
-			fprintf(stderr, "End of Tab processing\n");
+			fprintf(stderr, "End of Tab processing. Now at ...\n");
 #endif
 	 		break;
 
@@ -159,11 +166,13 @@ int tesi_handleControlCharacter(struct tesiObject *to, char c) {
 	 		// what do i do about wrapping back up to previous line?
 	 		// where should that be handled
 	 		// just move cursor, don't print space
-			tesi_limitCursor(to, 1);
+			tesi_limitCursor(to);
 			if(to->callback_eraseCharacter)
 				to->callback_eraseCharacter(to->pointer, to->x, to->y);
 			if (to->x > 0)
 				to->x--;
+			// limitCursor
+			// moveCursor
 			break;
 
 		default:
@@ -277,7 +286,7 @@ void tesi_interpretSequence(struct tesiObject *to) {
 				}
 
 				// limit cursor to boundaries
-				tesi_limitCursor(to, 1);
+				tesi_limitCursor(to);
 				break;
 
 			// SCROLLING RELATED
@@ -386,49 +395,34 @@ void tesi_bufferPush(struct tesiObject *to, char c) {
 }
 */
 
-// Returns 1 if cursor was out of bounds
-// however, there are no calls to limitCursor that DON'T want the callback_moveCursor invoked
-// so the parameter is probably not necessary
-int tesi_limitCursor(struct tesiObject *to, int moveCursorRegardless) {
+void tesi_limitCursor(struct tesiObject *to) {
 	// create some local variables for speed
 	int width = to->width;
 	int height = to->height;
-	int a, x;
-	int b, y;
+	int x;
+	int y;
 
-	a = x = to->x;
-	b = y = to->y;
+	x = to->x;
+	y = to->y;
 
-	if(x == width) {
-		x = 0;
-		y++;
-	}
 	if(x < 0)
-		x = 0;
-#ifdef DEBUG
-	if(a != x)
-		fprintf(stderr, "Cursor out of bounds in X direction: %d\n",a);
-#endif
-
-	if(y == height) {
-		y = height - 1;
-		if(to->callback_scrollUp)
-			to->callback_scrollUp(to->pointer);
-	}
+		to->x = 0;
 	if(y < 0)
-		y = 0;
+		to->y = 0;
+
+	if(x >= to->width) {
 #ifdef DEBUG
-	if(b != y)
-		fprintf(stderr, "Cursor out of bounds in Y direction: %d\n",b);
+		fprintf(stderr, "Cursor was out of bounds in X direction: %d\n", x);
 #endif
-	if(moveCursorRegardless || a != x || b != y) {
-		if(to->callback_moveCursor)
-			to->callback_moveCursor(to->pointer, x, y);
-		to->x = x;
-		to->y = y;
-		return 1;
+		to->x--;
 	}
-	return 0;
+
+	if(to->y >= to->height) {
+#ifdef DEBUG
+		fprintf(stderr, "Cursor was out of bounds in Y direction: %d\n", y);
+#endif
+		to->y--;
+	}
 }
 
 
@@ -442,6 +436,7 @@ struct tesiObject* newTesiObject(char *command, int width, int height) {
 		return NULL;
 
 	to->partialSequence = 0;
+	// we need to ensure that we don't blow this length
 	to->sequence = malloc(sizeof(char) * 40); // escape sequence buffer
 	to->sequence[0] = 0;
 	to->sequenceLength = 0;

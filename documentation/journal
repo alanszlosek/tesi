@@ -1,3 +1,17 @@
+2008-10-03
+
+Need to finish support for signaling. Actually, I'm not sure where it stands. If the child app attached to a tesi terminal closes, tesi should run a callback function. Control-C on a tesi terminal should pass that value to the app on the other end.
+
+It also appears I'm off by one somewhere. Top runs, but the last line isn't quite what it should be.
+
+It'd be nice to have a test "echo" app that prints all input. Control-C to kill it. That'd make for a good test of limitCursor and give me a real show of whether we can reach the boundaries with text output.
+
+What about smart logic that processes a string of output at a time? Only call moveCursor when done processing the output? Might be more difficult than it sounds, and also a prematur optimization?
+
+2008-10-02
+
+Had a realization. I don't think TESI should be in charge of scrolling up the screen if the cursor moves beyond that bottom. Same with going off the side. It shouldn't make corrections for bad coordinates. It should simply prevent the move.
+
 2007-05-19
 
 Scrolling. Needs a bit more thought. Probably should detect the need for scrolling differently than in limitCursor.

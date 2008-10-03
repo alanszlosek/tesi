@@ -1,191 +1,183 @@
-bash: no job control in this shell
-alan[tesi]$ qbash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ q`bash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ df
-Filesystem           1K-blocks      Used Available Use% Mounted on
-/dev/hda1              9614116   3268348   5857396  36% /
-none                    225436         0    225436   0% /dev/shm
-/dev/hdd1             38456308  11149904  25352904  31% /home
-/dev/hdd2            115377672  51046320  58470440  47% /home/alan/multimedia
-alan[tesi]$ free
-             total       used       free     shared    buffers     cached
-Mem:        450876     443904       6972          0      61288     190728
--/+ buffers/cache:     191888     258988
-Swap:       489972          0     489972
-alan[tesi]$ vim
-0;45r1;0a2;0a0aC1;0M5;1a6;4a~                                                                                                                            0a2;0M5;1a6;4a~                                                                                                                            0a3;0M5;1a6;4a~                                                                                                                            0a4;0M5;1a6;4a~                                                                                                                            0a5;0M5;1a6;4a~                                                                                                                            0a6;0M5;1a6;4a~                                                                                                                            0a7;0M5;1a6;4a~                                                                                                                            0a8;0M5;1a6;4a~                                                                                                                            0a9;0M5;1a6;4a~                                                                                                                            0a10;0M5;1a6;4a~                                                                                                                            0a11;0M5;1a6;4a~                                                                                                                            0a12;0M5;1a6;4a~                                                                                                                            0a13;0M5;1a6;4a~                                                                                                                            0a14;0M5;1a6;4a~                                                                                                                            0a15;0M5;1a6;4a~                                                                                                                            0a16;0M5;1a6;4a~                                                                                                                            0a17;0M5;1a6;4a~                                                                                                                            0a18;0M5;1a6;4a~                                                                                                                            0a19;0M5;1a6;4a~                                                                                                                            0a20;0M5;1a6;4a~                                                                                                                            0a21;0M5;1a6;4a~                                                                                                                            0a22;0M5;1a6;4a~                                                                                                                            0a23;0M5;1a6;4a~                                                                                                                            0a24;0M5;1a6;4a~                                                                                                                            0a25;0M5;1a6;4a~                                                                                                                            0a26;0M5;1a6;4a~                                                                                                                            0a27;0M5;1a6;4a~                                                                                                                            0a28;0M5;1a6;4a~                                                                                                                            0a29;0M5;1a6;4a~                                                                                                                            0a30;0M5;1a6;4a~                                                                                                                            0a31;0M5;1a6;4a~                                                                                                                            0a32;0M5;1a6;4a~                                                                                                                            0a33;0M5;1a6;4a~                                                                                                                            0a34;0M5;1a6;4a~                                                                                                                            0a35;0M5;1a6;4a~                                                                                                                            0a36;0M5;1a6;4a~                                                                                                                            0a37;0M5;1a6;4a~                                                                                                                            0a38;0M5;1a6;4a~                                                                                                                            0a39;0M5;1a6;4a~                                                                                                                            0a40;0M5;1a6;4a~                                                                                                                            0a41;0M5;1a6;4a~                                                                                                                            0a42;0M5;1a6;4a~                                                                                                                            0a43;0M5;1a6;4a~                                                                                                                            0a44;0M5;1a6;4a~                                                                                                                            0a45;107M0,0-145;121MAll17;54MVIM - Vi IMproved19;55Mversion 7.0.21920;50Mby Bram Moolenaar et al.21;41MVim is open source and freely distributable23;48MHelp poor children in Uganda!24;39Mtype  :help iccf6;4a<Enter>0a       for information 26;39Mtype  :q6;4a<Enter>0a               to exit         27;39Mtype  :help6;4a<Enter>0a  or  6;4a<F1>0a  for on-line help28;39Mtype  :help version76;4a<Enter>0a   for version info0;0M45;97M:0;0M45;97Mc45;0M:q!45;0Mc45;0Malan[tesi]$ bash: no job control in this shell
-alan[tesi]$ q`bash: no job control in this shell
-alan[tesi]$ clear
-Calan[tesi]$ cat a test_suite/a
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-scrolled
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ llllllllllllllffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdddddddddddddddddddddddd
-bash: llllllllllllllffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdddddddddddddddddddddddd: command not found
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ ssssssssssssssssssssssssssssssssssssssssssssssssssssssssffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-bash: ssssssssssssssssssssssssssssssssssssssssssssssssssssssssffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff: command not found
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ 
-alan[tesi]$ ddddddddddddddddddddddddddddddssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr           
-bash: ddddddddddddddddddddddddddddddssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: command not found
-alan[tesi]$ q
-bash: q: command not found
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ 
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ fbash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ lsbash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ fbash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ lf
-bash: lf: command not found
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ lbash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ bash: no job control in this shell
-alan[tesi]$ lsbash: no job control in this shell
-alan[tesi]$ ls
-FUTURE	  README  documentation  errors2   main    output	temp	  tesi.c  tesi.o
-Makefile  backup  errors	 examples  main.c  screenWidth	terminfo  tesi.h  test_suite
-alan[tesi]$ ð£h¤ØÀØÀØØØbash: no job control in this shell
-alan[tesi]$ lð£fØÀbash: no job control in this shell
-alan[tesi]$ lð£
+Carriage return
+cbMoveCursor: 0 0
+Newline
+key does not exist
+key does not exist
+Carriage return
+cbMoveCursor: 0 1
+Newline
+Carriage return
+cbMoveCursor: 0 2
+Newline
+key does not exist
+key does not exist
+Carriage return
+cbMoveCursor: 0 3
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 4
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 5
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 6
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 7
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 8
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 9
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 10
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 11
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 12
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 13
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 14
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 15
+Newline
+Carriage return
+cbMoveCursor: 0 16
+Newline
+key does not exist
+key does not exist
+Carriage return
+cbMoveCursor: 0 17
+Newline
+Carriage return
+cbMoveCursor: 0 18
+Newline
+Carriage return
+cbMoveCursor: 0 19
+Newline
+Carriage return
+cbMoveCursor: 0 20
+Newline
+key does not exist
+key does not exist
+Carriage return
+cbMoveCursor: 0 21
+Newline
+Carriage return
+cbMoveCursor: 0 22
+Newline
+key does not exist
+key does not exist
+Carriage return
+cbMoveCursor: 0 23
+Newline
+Carriage return
+cbMoveCursor: 0 24
+Newline
+key does not exist
+key does not exist
+Carriage return
+cbMoveCursor: 0 25
+Newline
+Carriage return
+cbMoveCursor: 0 26
+Newline
+key does not exist
+key does not exist
+Carriage return
+cbMoveCursor: 0 27
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 28
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 29
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 30
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 31
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 32
+Newline
+key does not exist
+Carriage return
+cbMoveCursor: 0 33
+Newline
+Carriage return
+cbMoveCursor: 0 34
+Newline
+key does not exist
+key does not exist
+Carriage return
+cbMoveCursor: 0 35
+Newline
+Carriage return
+cbMoveCursor: 0 36
+Newline
+key does not exist
+key does not exist
+Carriage return
+cbMoveCursor: 0 37
+Newline
+Carriage return
+cbMoveCursor: 0 38
+Newline
+Cursor was out of bounds in Y direction: 39
+Carriage return
+cbMoveCursor: 0 38
+Newline
+Cursor was out of bounds in Y direction: 39
+Carriage return
+cbMoveCursor: 0 38
+Newline
+Cursor was out of bounds in Y direction: 39
+key does not exist
+key does not exist
+key does not exist
+Carriage return
+cbMoveCursor: 0 38
+Newline
+Cursor was out of bounds in Y direction: 39
+Carriage return
+cbMoveCursor: 0 38
+Newline
+Cursor was out of bounds in Y direction: 39
+Carriage return
+cbMoveCursor: 0 38
+Newline
+Cursor was out of bounds in Y direction: 39
+Carriage return
+cbMoveCursor: 0 38
+Newline
+Cursor was out of bounds in Y direction: 39
+key does not exist
+g/_checkouts/tesi$ 
