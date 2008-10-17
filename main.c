@@ -31,19 +31,19 @@ void cbScrollUp(void *pointer) {
 #ifdef DEBUG
 	fprintf(stderr, "cbScrollUp\n");
 #endif
-	scrollok(pointer, true);
+	//scrollok(pointer, true);
 	if(wscrl(pointer, 1) == ERR)
 		fprintf(stderr, "Scroll error\n");
-	scrollok(pointer, false);
+	//scrollok(pointer, false);
 }
 void cbScrollDown(void *pointer) {
 #ifdef DEBUG
 	fprintf(stderr, "cbScrollDown\n");
 #endif
-	scrollok(pointer, true);
+	//scrollok(pointer, true);
 	if(wscrl(pointer, -1) == ERR)
 		fprintf(stderr, "Scroll error\n");
-	scrollok(pointer, false);
+	//scrollok(pointer, false);
 }
 void cbScrollRegion(void *pointer, int start, int end) {
 #ifdef DEBUG
@@ -116,11 +116,13 @@ int main(int argc, char **argv) {
 	if(scrollok(wScreen, true) == ERR)
 		fprintf(stderr, "scrollok error\n");
 	*/
+	scrollok(wScreen, true);
 	refresh();
 
-	getmaxyx(wScreen, j,i);
+	getmaxyx(wScreen, j, i);
 
  	to = newTesiObject("/bin/bash", i, j);
+ 	//to = newTesiObject("./test_suite/loop", i, j);
 	to->pointer = wScreen;
 
 	maxFd = to->fd_activity;
@@ -155,18 +157,21 @@ int main(int argc, char **argv) {
 	input = 0;
 	while(input != '~') {
 		FD_ZERO(&fds);
-		FD_SET(0, &fds);
-		FD_SET(to->fd_activity, &fds);
+		FD_SET(0, &fds); // watch for keyboard input
+		FD_SET(to->fd_activity, &fds); // watch for TESI output
 
 		pselect(maxFd + 1, &fds, NULL, NULL, &ts, NULL);
+		// see if TESI has data from it's child process waiting to be handled
+		// if so, tell it to process it
 		if(FD_ISSET(to->fd_activity, &fds)) {
 			tesi_handleInput(to);
+			// update the screen afterwards
 			wrefresh(to->pointer);
 		}
-			tesi_handleInput(to);
+		//tesi_handleInput(to);
 
 		if(FD_ISSET(0, &fds)) {
-			input = getch();
+			input = wgetch(wScreen);
 			//fprintf(stderr, "pressed: %c (%d)\n", input, input);
 			//read(0, &in, 1);
 			switch(input) {
@@ -177,7 +182,14 @@ int main(int argc, char **argv) {
 				case KEY_RIGHT:
 				case KEY_BACKSPACE:
 					break;
+				case KEY_ENTER:
+					fprintf(stderr, "Enter key pressed\n");
+					input = 10;
+					write(to->fd_input, &ch, 1);
+					break;
 				default:
+					// problem is, has_key detects for the current terminal
+					// irrelevant for the attached tesi term
 					/*
 					if(has_key(input)) {
 						fprintf(stderr, "key exists\n");
@@ -187,9 +199,10 @@ int main(int argc, char **argv) {
 							write(to->fd_input, &keySequence, strlen(keySequence));
 							free(keySequence);
 						}
+					
 					} else {
 					*/
-						fprintf(stderr, "key does not exist\n");
+						fprintf(stderr, "key does not exist (%d)\n", input);
 						ch = (char)input;
 						write(to->fd_input, &ch, 1);
 					//}

@@ -29,14 +29,19 @@ int tesi_handleInput(struct tesiObject *to) {
 	// avoid premature optimization ... wait until find bottlenecks
 	
 	// use poll for it's speed, allows us to call this function at regular intervals without first checking for input
+	/*
 	fds[0].fd = to->fd_activity;
 	fds[0].events = POLLIN | POLLPRI;
 	poll(fds, 1, 0);
 	if((fds[0].revents & (POLLIN | POLLPRI)) == 0) {
 		return 0;
 	}
+	*/
 
 	lengthRead = read(to->ptyMaster, input, 128);
+#ifdef DEBUG
+	fprintf(stderr, "TESI got %d characters from the pipe\n", lengthRead);
+#endif
 
 	f = fopen("output", "a+");
 	fwrite(input, lengthRead, 1, f);
@@ -130,7 +135,7 @@ int tesi_handleControlCharacter(struct tesiObject *to, char c) {
 #endif
 			to->y++;
 			//if(to->insertMode == 0 && to->linefeedMode == 1)
-				to->x = 0;
+				//to->x = 0;
 			tesi_limitCursor(to);
 			if(to->callback_moveCursor)
 				to->callback_moveCursor(to->pointer, to->x, to->y);
@@ -256,7 +261,7 @@ void tesi_interpretSequence(struct tesiObject *to) {
 				break;
 
 			// LINE-RELATED
-			case 'c': // clear line
+			case 'c': // clear line (from current x to end?)
 				if(to->callback_eraseLine)
 					to->callback_eraseLine(to->pointer, to->y);
 				break;
@@ -399,11 +404,8 @@ void tesi_limitCursor(struct tesiObject *to) {
 	// create some local variables for speed
 	int width = to->width;
 	int height = to->height;
-	int x;
-	int y;
-
-	x = to->x;
-	y = to->y;
+	int x = to->x;
+	int y = to->y;
 
 	if(x < 0)
 		to->x = 0;
@@ -414,14 +416,17 @@ void tesi_limitCursor(struct tesiObject *to) {
 #ifdef DEBUG
 		fprintf(stderr, "Cursor was out of bounds in X direction: %d\n", x);
 #endif
-		to->x--;
+		to->x = 0;
+		to->y++;
 	}
 
 	if(to->y >= to->height) {
 #ifdef DEBUG
-		fprintf(stderr, "Cursor was out of bounds in Y direction: %d\n", y);
+		fprintf(stderr, "Cursor was out of bounds (height %d) in Y direction: %d\n", to->height, y);
 #endif
-		to->y--;
+		to->y = to->height - 1;
+		if(to->callback_scrollUp)
+			to->callback_scrollUp(to->pointer);
 	}
 }
 
@@ -431,6 +436,7 @@ struct tesiObject* newTesiObject(char *command, int width, int height) {
 	struct winsize ws;
 	char message[256];
 	char *ptySlave;
+	
 	to = malloc(sizeof(struct tesiObject));
 	if(to == NULL)
 		return NULL;
@@ -463,27 +469,26 @@ struct tesiObject* newTesiObject(char *command, int width, int height) {
 	to->callback_bell = NULL;
 	to->callback_invertColors = NULL;
 
+	//to->callback_processReturned = NULL;
+
 	to->command[0] = to->command[1] = to->command[2] = NULL;
 	to->pid = 0;
 	to->ptyMaster = posix_openpt(O_RDWR|O_NOCTTY);
+	
+	if(to->ptyMaster == -1 || grantpt(to->ptyMaster) == -1 || unlockpt(to->ptyMaster) == -1) {
+		printf("Failed to open communication pipe\n");
+	}
 
 	to->fd_activity = to->ptyMaster; // descriptor to check whether the process has sent output
 	to->fd_input = to->ptyMaster; // descriptor for sending input to child process
 
-	// welcome message
-	/*
-	sprintf(message, "echo \"This %d x %d terminal is controlled by TESI...\"\n", width, height);
-	message[255] = 0;
-	write(to->fd_input, message, strlen(message));
-	*/
-
-	grantpt(to->ptyMaster);
-	unlockpt(to->ptyMaster);
 	to->pid = fork();
 	//setpgid(to->pid, to->pid); // set new process group id for easy killing of shell children
 	if(to->pid == 0) { // inside child
 		ptySlave = ptsname(to->ptyMaster);
 		to->ptySlave = open(ptySlave, O_RDWR);
+		
+		// need ot turn off echoing in the child
 		// dup fds to stdin and stdout, or something like, then exec /bin/bash
 		dup2(to->ptySlave, fileno(stdin));
 		dup2(to->ptySlave, fileno(stdout));
@@ -498,8 +503,8 @@ struct tesiObject* newTesiObject(char *command, int width, int height) {
 
 		//fflush(stdout); // flush output now because it will be cleared upon execv
 
-		//if(execl("/bin/bash", "/bin/bash", "--noediting", NULL) == -1)
-		if(execl("/bin/bash", "/bin/bash", NULL) == -1)
+		if(execl(command, command, NULL) == -1)
+		//if(execl("/bin/bash", "/bin/bash", NULL) == -1)
 		//if(execl("/bin/cat", "/bin/cat", NULL) == -1)
 			exit(EXIT_FAILURE); // exit and become zombie until parent cares....
 	}
@@ -512,6 +517,7 @@ struct tesiObject* newTesiObject(char *command, int width, int height) {
 void deleteTesiObject(void *p) {
 	struct tesiObject *to = (struct tesiObject*) p;
 
+	// kill if process is still running
 	//kill(-(getpgid(to->pid)), SIGTERM); // kill all with this process group id
 	kill(to->pid, SIGTERM); // probably don't need this line
 	waitpid(to->pid);

@@ -73,6 +73,8 @@ struct tesiObject {
 	void (*callback_scrollDown)(void*);
 	void (*callback_bell)(void*);
 	void (*callback_invertColors)(void*);
+	
+	//void (*callback_processReturned)(void*,int);
 
 	int x, y, x2, y2, width, height, scrollBegin, scrollEnd; // cursor x,y and window width,height
 	//int alternativeChar;

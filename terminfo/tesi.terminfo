@@ -32,6 +32,7 @@ tesi|tesi teminal,
 	setf=\E6;%p1%da,
 	setb=\E7;%p1%da,
 
+	kent=\r\n,
 	kcuu1=\Ek,
 	kcud1=\Ej,
 	kcub1=\Eh,

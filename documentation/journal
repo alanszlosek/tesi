@@ -1,3 +1,10 @@
+2008-10-16
+
+My test_suite/loop app was doing weird behavior because it was set to echo input back to the terminal. So tesi was getting the enter key twice:
+
+* Once from the code contained in loop.c spitting out input from getch
+* Once from the tty level logic echoing
+
 2008-10-03
 
 Need to finish support for signaling. Actually, I'm not sure where it stands. If the child app attached to a tesi terminal closes, tesi should run a callback function. Control-C on a tesi terminal should pass that value to the app on the other end.
