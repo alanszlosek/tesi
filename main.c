@@ -98,8 +98,6 @@ int main(int argc, char **argv) {
 	struct timespec ts;
 	WINDOW *wScreen;
 
-	//char *longString = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
-
 	wScreen = initscr();
 	noecho();
 	cbreak();
@@ -168,19 +166,34 @@ int main(int argc, char **argv) {
 			// update the screen afterwards
 			wrefresh(to->pointer);
 		}
-		//tesi_handleInput(to);
 
 		if(FD_ISSET(0, &fds)) {
 			input = wgetch(wScreen);
 			//fprintf(stderr, "pressed: %c (%d)\n", input, input);
 			//read(0, &in, 1);
 			switch(input) {
-				case KEY_UP:
-					// send tesi sequence for keyup
+				// unfortunately I don't know of any automated way to ask curses for the KEY_UP escape sequence for a foreign terminal
+				// so we have to hard-code these values for now
+				case KEY_UP: // send tesi sequence for keyup
+					keySequence = "\x1Bk";
+					write(to->fd_input, keySequence, 2);
+					break;
 				case KEY_DOWN:
+					keySequence = "\x1Bj";
+					write(to->fd_input, keySequence, 2);
+					break;
 				case KEY_LEFT:
+					keySequence = "\x1Bh";
+					write(to->fd_input, keySequence, 2);
+					break;
 				case KEY_RIGHT:
+					keySequence = "\x1Bl";
+					write(to->fd_input, keySequence, 2);
+					break;
 				case KEY_BACKSPACE:
+					keySequence = "\x1Bj";
+					write(to->fd_input, keySequence, 2);
+					break;
 					break;
 				case KEY_ENTER:
 					fprintf(stderr, "Enter key pressed\n");

@@ -323,28 +323,32 @@ void tesi_interpretSequence(struct tesiObject *to) {
 				break;
 
 			// INPUT RELATED
-			/*
+			// normally you can use arrow keys to get past where you've typed ...
+			// how do we prevent that?
 			case 'h': // left arrow
 				if(to->x > 0) {
 				       to->x--;
+					tesi_limitCursor(to);
 				}
 				break;
 			case 'l': // right arrow
 				if(to->x < to->width) {
 					to->x++;
+					tesi_limitCursor(to);
 				}
 				break;
 			case 'k': // up arrow
 				if(to->y > 0) {
 					to->y--;
+					tesi_limitCursor(to);
 				}
 				break;
 			case 'j': // down arrow
 				if(to->y < to->height) {
 					to->y++;
+					tesi_limitCursor(to);
 				}
 				break;
-			*/
 		}
 	}
 }
