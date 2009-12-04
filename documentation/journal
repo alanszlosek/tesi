@@ -1,3 +1,23 @@
+2009-12-04
+
+We don't have job control by default, so maybe something's not quite right with our "current terminal process group id" (from the bash manual JOB CONTROL section).
+
+Read and effective user ids? What the? Ah! It's just a temporary place to store the user id: http://en.allexperts.com/q/Unix-Linux-OS-1064/real-effective-user-id.htm
+
+Looks like I need to make the forked process a session leader with setsid(). Not sure why the parent's session id and process group id values don't work.
+
+Maybe this is why: when we create a TESI terminal, we're running on a new pty, which is separate from the old controlling terminal. Maybe bash sees that our new controlling terminal and the old session/process-group ids are incompatible. ?
+
+Or rather: the forked process isn't a process group leader, so it can't perform job control. If its PID was the same as its process group id, it'd be able to do job control. So we have to use setsid() to make a new session and process group.
+
+Also found this useful. http://en.wikipedia.org/wiki/Process_group
+
+Shit, now I'm trying to fix the arrow keys. Looking for curses constants, and converting them to strings TESI expects. But that's not working. Maybe I need to think about it with bash in the equation. I have to once-again research all the steps involved in processing keyboard input. Fuck.
+
+Thinking about it now, input from my keyboard goes through this process with TESI:
+
+My main keyboard loop controlled by ncurses -> translated and written to input pipe for tesi child -> goes to bash -> bash interprets the key and updates the display if necessary
+
 2008-10-16
 
 My test_suite/loop app was doing weird behavior because it was set to echo input back to the terminal. So tesi was getting the enter key twice:

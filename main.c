@@ -152,8 +152,8 @@ int main(int argc, char **argv) {
 
 	//write(to->pipeToChild[1], run, strlen(run));
 
-	input = 0;
-	while(input != '~') {
+	ch = '\0';
+	while(ch != '~') {
 		FD_ZERO(&fds);
 		FD_SET(0, &fds); // watch for keyboard input
 		FD_SET(to->fd_activity, &fds); // watch for TESI output
@@ -168,32 +168,37 @@ int main(int argc, char **argv) {
 		}
 
 		if(FD_ISSET(0, &fds)) {
+			read(0, &ch, 1);
+			if(ch != '~') {
+				write(to->fd_input, &ch, 1);
+			}
+/*
 			input = wgetch(wScreen);
 			//fprintf(stderr, "pressed: %c (%d)\n", input, input);
-			//read(0, &in, 1);
 			switch(input) {
 				// unfortunately I don't know of any automated way to ask curses for the KEY_UP escape sequence for a foreign terminal
 				// so we have to hard-code these values for now
 				case KEY_UP: // send tesi sequence for keyup
-					keySequence = "\x1Bk";
-					write(to->fd_input, keySequence, 2);
+					keySequence = "\x1bk";
+					write(to->fd_input, &keySequence, 2);
 					break;
 				case KEY_DOWN:
-					keySequence = "\x1Bj";
+					keySequence = "\x1bj";
 					write(to->fd_input, keySequence, 2);
 					break;
 				case KEY_LEFT:
-					keySequence = "\x1Bh";
-					write(to->fd_input, keySequence, 2);
+					fprintf(stderr, "left arrow\n");
+					keySequence = "\x1bh";
+					write(to->fd_input, "\x1b", 1);
+					write(to->fd_input, "h", 1);
 					break;
 				case KEY_RIGHT:
-					keySequence = "\x1Bl";
+					keySequence = "\x1bl";
 					write(to->fd_input, keySequence, 2);
 					break;
 				case KEY_BACKSPACE:
 					keySequence = "\x1Bj";
 					write(to->fd_input, keySequence, 2);
-					break;
 					break;
 				case KEY_ENTER:
 					fprintf(stderr, "Enter key pressed\n");
@@ -203,34 +208,13 @@ int main(int argc, char **argv) {
 				default:
 					// problem is, has_key detects for the current terminal
 					// irrelevant for the attached tesi term
-					/*
-					if(has_key(input)) {
-						fprintf(stderr, "key exists\n");
-
-						keySequence = keybound(input, 0);
-						if(keySequence)  {
-							write(to->fd_input, &keySequence, strlen(keySequence));
-							free(keySequence);
-						}
-					
-					} else {
-					*/
 						fprintf(stderr, "key does not exist (%d)\n", input);
 						ch = (char)input;
 						write(to->fd_input, &ch, 1);
 					//}
 					break;
 			}
-			/*
-			if(in == ('H' - '@'))
-				fprintf(stderr, "backspace\n");
-			if(in == '@')
-				write(to->fd_input, longString, strlen(longString));
-			else
-
-			//write(to->pipeFromChild[1], &in, 1);
-			write(to->fd_input, &in, 1);
-			*/
+*/
 		}
 	}
 

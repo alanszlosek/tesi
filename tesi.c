@@ -6,6 +6,7 @@ See terminfo definition
 */
 
 #define DEBUG 1
+#define DEBUG_SEQ_ACTIONS 1
 
 /*
 handleInput
@@ -58,6 +59,9 @@ int tesi_handleInput(struct tesiObject *to) {
 		}
 
 		if((c >= 1 && c <= 31) || c == 127) {
+#ifdef DEBUG_SEQ_ACTIONS
+			fprintf(stderr, "Control character: %i\n", (int)c);
+#endif
 			// this should trigger partialSequence = 1
 			tesi_handleControlCharacter(to, c);
 			continue;
@@ -81,7 +85,7 @@ int tesi_handleInput(struct tesiObject *to) {
 #endif
 
 			if(to->partialSequence == 0) {
-#ifdef DEBUG
+#ifdef DEBUG_SEQ_ACTIONS
 				fprintf(stderr, "Sequence: %s\n", to->sequence);
 #endif
 				tesi_interpretSequence(to);
@@ -121,7 +125,7 @@ int tesi_handleControlCharacter(struct tesiObject *to, char c) {
 			break;
 
 		case '\r': // carriage return ('M' - '@'). Move cursor to first column.
-#ifdef DEBUG
+#ifdef DEBUG_SEQ_ACTIONS
 			fprintf(stderr, "Carriage return. Move to x=0\n");
 #endif
 			to->x = 0;
@@ -130,7 +134,7 @@ int tesi_handleControlCharacter(struct tesiObject *to, char c) {
 			break;
 
 		case '\n':  // line feed ('J' - '@'). Move cursor down line and to first column.
-#ifdef DEBUG
+#ifdef DEBUG_SEQ_ACTIONS
 			fprintf(stderr, "Newline. x=0 y++\n");
 #endif
 			to->y++;
@@ -142,7 +146,7 @@ int tesi_handleControlCharacter(struct tesiObject *to, char c) {
 			break;
 
 		case '\t': // ht - horizontal tab, ('I' - '@')
-#ifdef DEBUG
+#ifdef DEBUG_SEQ_ACTIONS
 			fprintf(stderr, "Tab. Currently at %d,%d (x,y)\n", to->x, to->y);
 #endif
 			j = 8 - (to->x % 8);		
@@ -156,7 +160,7 @@ int tesi_handleControlCharacter(struct tesiObject *to, char c) {
 				if(to->callback_printCharacter)
 					to->callback_printCharacter(to->pointer, ' ', to->x, to->y);
 			}
-#ifdef DEBUG
+#ifdef DEBUG_SEQ_ACTIONS
 			fprintf(stderr, "End of Tab processing. Now at ...\n");
 #endif
 	 		break;
@@ -171,17 +175,22 @@ int tesi_handleControlCharacter(struct tesiObject *to, char c) {
 	 		// what do i do about wrapping back up to previous line?
 	 		// where should that be handled
 	 		// just move cursor, don't print space
-			tesi_limitCursor(to);
+
+			// THIS IS NOT BACKSPACE, JUST LEFT ARROW
+			if (to->x > 0) {
+				to->x--;
+				
+				if(to->callback_moveCursor)
+					to->callback_moveCursor(to->pointer, to->x, to->y);
+			}
+			/*
 			if(to->callback_eraseCharacter)
 				to->callback_eraseCharacter(to->pointer, to->x, to->y);
-			if (to->x > 0)
-				to->x--;
-			// limitCursor
-			// moveCursor
+			*/
 			break;
 
 		default:
-#ifdef DEBUG
+#ifdef DEBUG_SEQ_ACTIONS
 			fprintf(stderr, "Unrecognized control char: %d (^%c)\n", c, c + '@');
 #endif
 			return false;
@@ -202,7 +211,7 @@ void tesi_interpretSequence(struct tesiObject *to) {
 	int i,j;
 
 #ifdef DEBUG
-	//fprintf(stderr, "Operation: %c\n", operation);
+	fprintf(stderr, "Operation: %c\n", operation);
 #endif
 
 	// preliminary reset of parameters
@@ -236,8 +245,10 @@ void tesi_interpretSequence(struct tesiObject *to) {
 	if( (operation >= 'A' && operation <= 'Z') || (operation >= 'a' && operation <= 'z')) {
 		int j;
 		switch(operation) {
-			// RESET INITIALIZATIONS
 			case 'R': // defaults
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "Reset to default state\n");
+#endif
 				to->parameters[0] = 0;
 				tesi_processAttributes(to);
 				to->parameters[0] = 1;
@@ -245,7 +256,7 @@ void tesi_interpretSequence(struct tesiObject *to) {
 				// scroll regions, colors, etc.
 				break;
 			case 'C': // clear screen
-#ifdef DEBUG
+#ifdef DEBUG_SEQ_ACTIONS
 				fprintf(stderr, "Clear screen\n");
 #endif
 
@@ -262,25 +273,37 @@ void tesi_interpretSequence(struct tesiObject *to) {
 
 			// LINE-RELATED
 			case 'c': // clear line (from current x to end?)
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "If callback_eraseLine is set, clear to EOL\n");
+#endif
 				if(to->callback_eraseLine)
 					to->callback_eraseLine(to->pointer, to->y);
 				break;
 			case 'L': // insert line
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "If callback_insertLine is set, insert line below current\n");
+#endif
 				if(to->callback_insertLine)
 					to->callback_insertLine(to->pointer, to->y);
 				break;
 
 			// ATTRIBUTES AND MODES
 			case 'a': // change output attributes
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "Attribute change\n");
+#endif
 				tesi_processAttributes(to);
 				break;
 			case 'I': // enter/exit insert mode
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "Enter/exit insert mode (does nothing)\n");
+#endif
 				break;
 
 			// CURSOR RELATED
 			case 'M': // cup. move to col, row, cursor to home
-#ifdef DEBUG
-				//fprintf(stderr, "Move cursor (x,y): %d %d\n", to->x, to->y);
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "Move cursor (x,y): %d %d\n", to->x, to->y);
 #endif
 				// parameters should be 1 more than the real value
 				if(to->parametersLength == 0)
@@ -296,7 +319,7 @@ void tesi_interpretSequence(struct tesiObject *to) {
 
 			// SCROLLING RELATED
 			case 'r': // change scrolling region
-#ifdef DEBUG
+#ifdef DEBUG_SEQ_ACTIONS
 				fprintf(stderr, "Change scrolling region from line %d to %d\n", i, j);
 #endif
 				if(to->parametersLength == 2) {
@@ -311,10 +334,16 @@ void tesi_interpretSequence(struct tesiObject *to) {
 				}
 				break;
 			case 'D': // scroll down
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "If callback_scrollDown is set, scroll down\n");
+#endif
 				if(to->callback_scrollDown)
 					to->callback_scrollDown(to->pointer);
 				break;
 			case 'U': // scroll up
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "If callback_scrollUp is set, scroll down\n");
+#endif
 				if(to->callback_scrollUp)
 					to->callback_scrollUp(to->pointer);
 				// cursor shouldn't change positions after a scroll
@@ -326,24 +355,36 @@ void tesi_interpretSequence(struct tesiObject *to) {
 			// normally you can use arrow keys to get past where you've typed ...
 			// how do we prevent that?
 			case 'h': // left arrow
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "Left arrow\n");
+#endif
 				if(to->x > 0) {
 				       to->x--;
 					tesi_limitCursor(to);
 				}
 				break;
 			case 'l': // right arrow
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "Right arrow\n");
+#endif
 				if(to->x < to->width) {
 					to->x++;
 					tesi_limitCursor(to);
 				}
 				break;
 			case 'k': // up arrow
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "Up arrow\n");
+#endif
 				if(to->y > 0) {
 					to->y--;
 					tesi_limitCursor(to);
 				}
 				break;
 			case 'j': // down arrow
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "Down arrow\n");
+#endif
 				if(to->y < to->height) {
 					to->y++;
 					tesi_limitCursor(to);
@@ -429,6 +470,8 @@ void tesi_limitCursor(struct tesiObject *to) {
 		fprintf(stderr, "Cursor was out of bounds (height %d) in Y direction: %d\n", to->height, y);
 #endif
 		to->y = to->height - 1;
+		// not sure we should auto scroll ... messes up top
+		// but we need to to make line returns in bash work. weird.
 		if(to->callback_scrollUp)
 			to->callback_scrollUp(to->pointer);
 	}
@@ -486,9 +529,24 @@ struct tesiObject* newTesiObject(char *command, int width, int height) {
 	to->fd_activity = to->ptyMaster; // descriptor to check whether the process has sent output
 	to->fd_input = to->ptyMaster; // descriptor for sending input to child process
 
+#ifdef DEBUG
+		fprintf(stderr, "Before fork. process id: %i parent process id: %i session id: %i process group id: %i\n", (int)getpid(), (int)getppid(), getsid(0), (int)getpgid(0));
+#ifdef DEBUG
+		fprintf(stderr, "session id: %i process group id: %i\n", getsid(0), (int)getpgid(0));
+#endif
+#endif
+
 	to->pid = fork();
 	//setpgid(to->pid, to->pid); // set new process group id for easy killing of shell children
 	if(to->pid == 0) { // inside child
+		// hmm, where do we tell the forked process to use the new pty? i can't remember
+
+		setsid(); // become session leader so bash job control will work
+
+		// before reset file descriptors, print process and group ids?
+#ifdef DEBUG
+		fprintf(stderr, "After fork. process id: %i parent process id: %i session id: %i process group id: %i\n", (int)getpid(), (int)getppid(), getsid(0), (int)getpgid(0));
+#endif
 		ptySlave = ptsname(to->ptyMaster);
 		to->ptySlave = open(ptySlave, O_RDWR);
 		
