@@ -81,7 +81,7 @@ int tesi_handleInput(struct tesiObject *to) {
 #ifdef DEBUG
 			// check to->sequenceLength ... it can't be more than 39
 			if(to->sequenceLength > 39)
-				fprintf(stderr, "Sequence length exceeded: %s\n", to->sequenceLength);
+				fprintf(stderr, "Sequence length exceeded: %i\n", to->sequenceLength);
 #endif
 
 			if(to->partialSequence == 0) {
@@ -167,6 +167,9 @@ int tesi_handleControlCharacter(struct tesiObject *to, char c) {
 
 		case '\a': // bell ('G' - '@')
 	 		// do nothing for now... maybe a visual bell would be nice?
+#ifdef DEBUG_SEQ_ACTIONS
+			fprintf(stderr, "If callback_bell is set, bong!\n");
+#endif
 			if(to->callback_bell)
 				to->callback_bell(to->pointer);
 			break;
@@ -177,6 +180,9 @@ int tesi_handleControlCharacter(struct tesiObject *to, char c) {
 	 		// just move cursor, don't print space
 
 			// THIS IS NOT BACKSPACE, JUST LEFT ARROW
+#ifdef DEBUG_SEQ_ACTIONS
+			fprintf(stderr, "Ascii 8, left arrow\n");
+#endif
 			if (to->x > 0) {
 				to->x--;
 				
@@ -396,17 +402,21 @@ void tesi_interpretSequence(struct tesiObject *to) {
 
 
 void tesi_processAttributes(struct tesiObject *to) {
-	//short bold, underline, blink, reverse, foreground, background, charset, i;
+	// 0short bold, 1underline, 2blink, 3reverse, 4foreground, 5background, 6charset, 7i;
 
 	//standout, underline, reverse, blink, dim, bold, foreground, background
 	// no need for invisible or dim, right?
 	switch(to->parameters[0]) {
 		case 0: // all off
 			to->attributes[0] = to->attributes[1] = to->attributes[2] = to->attributes[3] = to->attributes[4] = to->attributes[5] = to->attributes[6] = to->attributes[7] = 0;
+			to->attributes[4] = 7;
+			to->attributes[5] = 0;
 			//bold = underline = blink = reverse = foreground = background = charset = 0;
 			break;
 		case 1: // standout
-			to->attributes[4] = to->parameters[1];
+			// what is our standout mode? fg=black, bg=white
+			to->attributes[4] = 0;
+			to->attributes[5] = 7;
 			break;
 		case 2: // underline
 			to->attributes[1] = to->parameters[1];
@@ -421,19 +431,19 @@ void tesi_processAttributes(struct tesiObject *to) {
 			to->attributes[4] = 1;
 			break;
 		case 6: // foreground color
-			to->attributes[5] = to->parameters[1];
+			to->attributes[4] = to->parameters[1];
 			// setf
 			// black blue green cyan red magenta yellow white
 			// setaf
 			// black, red green yellow blue magenta cyan white
 			break;
 		case 7: // background color
-			to->attributes[6] = to->parameters[1];
+			to->attributes[5] = to->parameters[1];
 			break;
 	}
 
 	if(to->callback_attributes)
-		to->callback_attributes(to->pointer, to->attributes[4], to->attributes[3], to->attributes[2], to->attributes[1], to->attributes[5], to->attributes[6], 0);
+		to->callback_attributes(to->pointer, to->attributes[0], to->attributes[1], to->attributes[2], to->attributes[3], to->attributes[4], to->attributes[5], 0);
 }
 /*
 void tesi_bufferPush(struct tesiObject *to, char c) {
@@ -470,8 +480,6 @@ void tesi_limitCursor(struct tesiObject *to) {
 		fprintf(stderr, "Cursor was out of bounds (height %d) in Y direction: %d\n", to->height, y);
 #endif
 		to->y = to->height - 1;
-		// not sure we should auto scroll ... messes up top
-		// but we need to to make line returns in bash work. weird.
 		if(to->callback_scrollUp)
 			to->callback_scrollUp(to->pointer);
 	}
@@ -503,6 +511,10 @@ struct tesiObject* newTesiObject(char *command, int width, int height) {
 	to->scrollBegin = 0;
 	to->scrollEnd = height - 1;
 	to->insertMode = 0;
+	
+	to->attributes[0] = to->attributes[1] = to->attributes[2] = to->attributes[3] = to->attributes[4] = to->attributes[5] = to->attributes[6] = to->attributes[7] = 0;
+	to->attributes[4] = 0;
+	to->attributes[5] = 7;
 
 	to->callback_printCharacter = NULL;
 	to->callback_printString = NULL;
