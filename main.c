@@ -73,6 +73,9 @@ void cbBell(struct tesiObject *to) {
 }
 
 void cbAttributes(void *pointer, short bold, short blink, short inverse, short underline, short foreground, short background, short charset) {
+#ifdef DEBUG
+	fprintf(stderr, "cbAttributes. bold %i blink %i inverse %i underline %i foreground %i background %i\n", bold, blink, inverse, underline, foreground, background);
+#endif
 	if(bold)
 		wattron(pointer, A_BOLD);
 	else
@@ -81,10 +84,10 @@ void cbAttributes(void *pointer, short bold, short blink, short inverse, short u
 		wattron(pointer, A_STANDOUT);
 	else
 		wattroff(pointer, A_STANDOUT);
-	if(foreground && background) {
-		init_pair(7, foreground, background);
-		wattron(pointer, COLOR_PAIR(7));
-	}
+
+	// keep overriding the pair
+	init_pair(7, foreground, background);
+	wattron(pointer, COLOR_PAIR(7));
 }
 
 int main(int argc, char **argv) {
@@ -105,16 +108,30 @@ int main(int argc, char **argv) {
 	//
 	keypad(wScreen, true);
 
-	start_color();
-	init_pair(1, COLOR_BLUE, COLOR_WHITE);
-	attron(COLOR_PAIR(1));
-	bkgd(' ' | COLOR_PAIR(1));
+	if( start_color() != ERR) {
+		init_color(COLOR_WHITE, 1000, 1000, 1000);
+		init_pair(0, COLOR_WHITE, COLOR_BLACK);
+		init_pair(1, COLOR_WHITE, COLOR_BLACK);
+		init_pair(2, COLOR_WHITE, COLOR_BLACK);
+		init_pair(3, COLOR_WHITE, COLOR_BLACK);
+		init_pair(4, COLOR_WHITE, COLOR_BLACK);
+		init_pair(5, COLOR_WHITE, COLOR_BLACK);
+		init_pair(6, COLOR_WHITE, COLOR_BLACK);
+		//wattroff(wScreen, A_DIM);
+		wcolor_set(wScreen, 0, NULL);
+		//bkgd(' ');
+		//wattron(wScreen, A_STANDOUT);
+
+	} else {
+		fprintf(stderr, "No color\n");
+	}
 
 	/*
 	if(scrollok(wScreen, true) == ERR)
 		fprintf(stderr, "scrollok error\n");
 	*/
-	scrollok(wScreen, true);
+	// we shouldn't be in charge of scrolling in our ncurses window
+	//scrollok(wScreen, true);
 	refresh();
 
 	getmaxyx(wScreen, j, i);
@@ -139,10 +156,7 @@ int main(int argc, char **argv) {
 	to->callback_insertLine = &cbInsertLine;
 	to->callback_eraseLine = &cbEraseLine;
 	to->callback_attributes = &cbAttributes;
-	/*
-	to->callback_scrollDown = &cbScrollDown;
 	to->callback_bell = &cbBell;
-	*/
 
 	//write(to->pipeToChild[1], "env\nls\n",10);
 	//strcpy(run, "/home/alan/coding/_testing/c/ncurses/ncurses2\n");
