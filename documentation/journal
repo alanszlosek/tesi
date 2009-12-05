@@ -16,7 +16,9 @@ Shit, now I'm trying to fix the arrow keys. Looking for curses constants, and co
 
 Thinking about it now, input from my keyboard goes through this process with TESI:
 
-My main keyboard loop controlled by ncurses -> translated and written to input pipe for tesi child -> goes to bash -> bash interprets the key and updates the display if necessary
+My main keyboard loop controlled by ncurses -> translated and written to input pipe for tesi child -> goes to bash -> bash interprets the key and updates the display if necessary. So, I don't need to do translation at all. Bash should be doing that.
+
+So I turned ncurses scrolling off in main.c, and top works inside tesi.
 
 2008-10-16
 
