@@ -7,17 +7,15 @@ tesi|tesi teminal,
 	clear=\EC,
 	el=\Ec,
 
-	csr=\E%p1%d;%p2%dr,
+	csr=\E%p1%d;%p2%dR,
 	ind=\EU,
 	ri=\ED,
 
 	home=\E0;0M,
 	cup=\E%p1%d;%p2%dM,
 
-	il=\E%p1%dL,
-
-	smir=\E1I,
-	rmir=\E0I,
+	il=\E%p1%dI,
+	dl=\E%p1%di,
 
 	bel=^G,
 
@@ -33,7 +31,7 @@ tesi|tesi teminal,
 	setb=\E7;%p1%da,
 
 	kent=\r\n,
-	kcuu1=\Ek,
-	kcud1=\Ej,
-	kcub1=\Eh,
-	kcuf1=\El,
+	kcuu1=\Eu,
+	kcud1=\Ed,
+	kcub1=\El,
+	kcuf1=\Er,

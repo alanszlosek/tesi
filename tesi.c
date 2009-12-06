@@ -285,12 +285,23 @@ void tesi_interpretSequence(struct tesiObject *to) {
 				if(to->callback_eraseLine)
 					to->callback_eraseLine(to->pointer, to->y);
 				break;
-			case 'L': // insert line
+			case 'I': // insert line
+				// should only be done from x = 0
 #ifdef DEBUG_SEQ_ACTIONS
 				fprintf(stderr, "If callback_insertLine is set, insert line below current\n");
 #endif
 				if(to->callback_insertLine)
 					to->callback_insertLine(to->pointer, to->y);
+				break;
+			case 'i': // delete line
+				// should only be done from x = 0
+#ifdef DEBUG_SEQ_ACTIONS
+				fprintf(stderr, "If callback_insertLine is set, insert line below current\n");
+#endif
+/*
+				if(to->callback_insertLine)
+					to->callback_insertLine(to->pointer, to->y);
+*/
 				break;
 
 			// ATTRIBUTES AND MODES
@@ -300,11 +311,13 @@ void tesi_interpretSequence(struct tesiObject *to) {
 #endif
 				tesi_processAttributes(to);
 				break;
+/*
 			case 'I': // enter/exit insert mode
 #ifdef DEBUG_SEQ_ACTIONS
 				fprintf(stderr, "Enter/exit insert mode (does nothing)\n");
 #endif
 				break;
+*/
 
 			// CURSOR RELATED
 			case 'M': // cup. move to col, row, cursor to home
@@ -324,7 +337,8 @@ void tesi_interpretSequence(struct tesiObject *to) {
 				break;
 
 			// SCROLLING RELATED
-			case 'r': // change scrolling region
+			// hmm, top does change the scroll region
+			case 'S': // change scrolling region
 #ifdef DEBUG_SEQ_ACTIONS
 				fprintf(stderr, "Change scrolling region from line %d to %d\n", i, j);
 #endif
@@ -340,6 +354,7 @@ void tesi_interpretSequence(struct tesiObject *to) {
 				}
 				break;
 			case 'D': // scroll down
+				// this should only be called when cursor is at bottom left
 #ifdef DEBUG_SEQ_ACTIONS
 				fprintf(stderr, "If callback_scrollDown is set, scroll down\n");
 #endif
@@ -347,6 +362,7 @@ void tesi_interpretSequence(struct tesiObject *to) {
 					to->callback_scrollDown(to->pointer);
 				break;
 			case 'U': // scroll up
+				// this should only be called when the cursort is at the top left
 #ifdef DEBUG_SEQ_ACTIONS
 				fprintf(stderr, "If callback_scrollUp is set, scroll down\n");
 #endif
@@ -360,7 +376,7 @@ void tesi_interpretSequence(struct tesiObject *to) {
 			// INPUT RELATED
 			// normally you can use arrow keys to get past where you've typed ...
 			// how do we prevent that?
-			case 'h': // left arrow
+			case 'l': // left arrow
 #ifdef DEBUG_SEQ_ACTIONS
 				fprintf(stderr, "Left arrow\n");
 #endif
@@ -369,7 +385,7 @@ void tesi_interpretSequence(struct tesiObject *to) {
 					tesi_limitCursor(to);
 				}
 				break;
-			case 'l': // right arrow
+			case 'r': // right arrow
 #ifdef DEBUG_SEQ_ACTIONS
 				fprintf(stderr, "Right arrow\n");
 #endif
@@ -378,7 +394,7 @@ void tesi_interpretSequence(struct tesiObject *to) {
 					tesi_limitCursor(to);
 				}
 				break;
-			case 'k': // up arrow
+			case 'u': // up arrow
 #ifdef DEBUG_SEQ_ACTIONS
 				fprintf(stderr, "Up arrow\n");
 #endif
@@ -387,7 +403,7 @@ void tesi_interpretSequence(struct tesiObject *to) {
 					tesi_limitCursor(to);
 				}
 				break;
-			case 'j': // down arrow
+			case 'd': // down arrow
 #ifdef DEBUG_SEQ_ACTIONS
 				fprintf(stderr, "Down arrow\n");
 #endif
@@ -475,6 +491,8 @@ void tesi_limitCursor(struct tesiObject *to) {
 		to->y++;
 	}
 
+	// when we don't auto scroll, top doesn't work
+	// but we get an extra line
 	if(to->y >= to->height) {
 #ifdef DEBUG
 		fprintf(stderr, "Cursor was out of bounds (height %d) in Y direction: %d\n", to->height, y);
