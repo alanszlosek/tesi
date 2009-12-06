@@ -1,12 +1,11 @@
-- proper handling of tabs
+- when come out of top, terminal doesn't scroll up
+- get less working
+- get top working
 - implement knox using iterm
 	- get ui nice, etc
 	- then switch back to TESI when TESI is mature
-- why less not process keypresses but vim does?
 - fix color usage from child apps
 - issue with margin at bottom right
-
-- what should echo the keys types at the command line?
 - terminals of larger size
 	- env variables?
 - character set mapping
@@ -14,6 +13,10 @@
 
 DONE
 
+- proper handling of tabs
+	- works when i send keyboard input up the pipe as i get it
+- what should echo the keys typed at the command line?
+	- the child program should be the one processing keyboard input and determining if it needs to echo the keys
 - callback_invertColors() function for flipping colors on whole terminal
 - look at libROTE for pty and shell invocation
 	- posix_openpt is bi-directional, so it should work for my needs with one use and then grantpt(), etc.
