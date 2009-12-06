@@ -31,19 +31,19 @@ void cbScrollUp(void *pointer) {
 #ifdef DEBUG
 	fprintf(stderr, "cbScrollUp\n");
 #endif
-	//scrollok(pointer, true);
+	scrollok(pointer, true);
 	if(wscrl(pointer, 1) == ERR)
-		fprintf(stderr, "Scroll error\n");
-	//scrollok(pointer, false);
+		fprintf(stderr, "ncurses said there was a scrolling error\n");
+	scrollok(pointer, false);
 }
 void cbScrollDown(void *pointer) {
 #ifdef DEBUG
 	fprintf(stderr, "cbScrollDown\n");
 #endif
-	//scrollok(pointer, true);
+	scrollok(pointer, true);
 	if(wscrl(pointer, -1) == ERR)
-		fprintf(stderr, "Scroll error\n");
-	//scrollok(pointer, false);
+		fprintf(stderr, "ncurses said there was a scrolling error\n");
+	scrollok(pointer, false);
 }
 void cbScrollRegion(void *pointer, int start, int end) {
 #ifdef DEBUG
@@ -66,7 +66,7 @@ void cbEraseLine(void *pointer, int y) {
 	wclrtoeol(pointer);
 }
 
-void cbBell(struct tesiObject *to) {
+void cbBell(void *pointer) {
 #ifdef DEBUG
 	fprintf(stderr, "cbBell\n");
 #endif
