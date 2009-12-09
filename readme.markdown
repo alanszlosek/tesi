@@ -10,7 +10,7 @@ The TESI terminal was specifically designed to be modelled in software. The esca
 The interface to and from a TESI terminal was also designed to be easy to use. Great care was taken to utilize great ideas (like the callback functions of libiterm) and improve upon others (the difficulty of working with libiterm and the limiting assumptions made by libROTE). The full source code is around 600 lines.
 
 
-SUMMARY OF SUPPORTED ESCAPE SEQUENCES
+SUPPORTED ESCAPE SEQUENCES AND CAPABILITIES
 ====
 
 * Move cursor to X,Y
@@ -23,6 +23,16 @@ SUMMARY OF SUPPORTED ESCAPE SEQUENCES
 * Change scrolling region
 * Scroll up/down
 * Cursor up, down, left, right
+
+Auto Margin
+The cursor should stick to the right edge when text is output. But if issue a cuf1 from the right edge - 
+Is there a string for toggling auto margins?
+
+bw
+If at left, and cub1, then cursor will move to the right edge of the previous row.
+
+Insert Line / Delete Line
+Should only be done from x=0
 
 
 HISTORY

@@ -103,10 +103,10 @@ int main(int argc, char **argv) {
 
 	wScreen = initscr();
 	noecho();
-	cbreak();
-	//raw();
+	//cbreak();
+	raw();
 	//
-	keypad(wScreen, true);
+	//keypad(wScreen, true);
 
 	if( start_color() != ERR) {
 		init_color(COLOR_WHITE, 1000, 1000, 1000);

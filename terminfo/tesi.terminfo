@@ -30,7 +30,7 @@ tesi|tesi teminal,
 	setf=\E6;%p1%da,
 	setb=\E7;%p1%da,
 
-	kent=\r\n,
+#	kent=\r\n,
 	kcuu1=\Eu,
 	kcud1=\Ed,
 	kcub1=\El,

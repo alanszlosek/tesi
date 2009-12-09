@@ -1,4 +1,6 @@
 - when come out of top, terminal doesn't scroll up
+	- it does when we auto scroll, but it scrolls 1 extra line
+	- when top quits, it moves off the bottom of the screen and sends \r\n. i guess that's how it figures it can scroll. maybe i should check the top source.
 - get less working
 - get top working
 - implement knox using iterm

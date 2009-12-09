@@ -140,9 +140,14 @@ int tesi_handleControlCharacter(struct tesiObject *to, char c) {
 			to->y++;
 			//if(to->insertMode == 0 && to->linefeedMode == 1)
 				//to->x = 0;
-			tesi_limitCursor(to);
-			if(to->callback_moveCursor)
-				to->callback_moveCursor(to->pointer, to->x, to->y);
+			if(to->y >= to->height) {
+				to->y--;	
+				if(to->callback_scrollUp)
+					to->callback_scrollUp(to->pointer);
+			} else {
+				if(to->callback_moveCursor)
+					to->callback_moveCursor(to->pointer, to->x, to->y);
+			}
 			break;
 
 		case '\t': // ht - horizontal tab, ('I' - '@')
@@ -498,8 +503,12 @@ void tesi_limitCursor(struct tesiObject *to) {
 		fprintf(stderr, "Cursor was out of bounds (height %d) in Y direction: %d\n", to->height, y);
 #endif
 		to->y = to->height - 1;
+		// maybe we shouldn't scroll up until we get a newline while at the last line
+		// and maybe top thinks we have more lines than we have
+		/*
 		if(to->callback_scrollUp)
 			to->callback_scrollUp(to->pointer);
+		*/
 	}
 }
 
@@ -611,8 +620,8 @@ void deleteTesiObject(void *p) {
 
 	// kill if process is still running
 	//kill(-(getpgid(to->pid)), SIGTERM); // kill all with this process group id
-	kill(to->pid, SIGTERM); // probably don't need this line
-	waitpid(to->pid);
+	kill(to->pid, 9); // probably don't need this line
+	waitpid(to->pid, NULL, 0);
 
 	close(to->ptyMaster);
 
