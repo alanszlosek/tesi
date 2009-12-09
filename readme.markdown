@@ -13,7 +13,9 @@ The interface to and from a TESI terminal was also designed to be easy to use. G
 INSTALL
 ====
 
-You'll need to add the TESI terminfo definition to your home directory with:
+main.c is a sample program that uses a TESI terminal backend, displayed using ncurses.
+
+You'll need ncurses and the development headers. You'll also need to add the TESI terminfo definition to your home directory with:
 
 	tic terminfo/tesi.terminfo
 
