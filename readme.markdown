@@ -10,6 +10,16 @@ The TESI terminal was specifically designed to be modelled in software. The esca
 The interface to and from a TESI terminal was also designed to be easy to use. Great care was taken to utilize great ideas (like the callback functions of libiterm) and improve upon others (the difficulty of working with libiterm and the limiting assumptions made by libROTE). The full source code is around 600 lines.
 
 
+INSTALL
+====
+
+You'll need to add the TESI terminfo definition to your home directory with:
+
+	tic terminfo/tesi.terminfo
+
+Then "make" should work, and you can "./main 2> errors" to run (debugging to stderr is on). Tilde exits.
+
+
 SUPPORTED ESCAPE SEQUENCES AND CAPABILITIES
 ====
 
